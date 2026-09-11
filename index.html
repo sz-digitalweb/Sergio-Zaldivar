@@ -9,27 +9,22 @@
     
     <style>
         body {
+            /* Fondo fijo, sin animaciones que consuman recursos */
             background-color: #050505;
             background-image: 
                 linear-gradient(rgba(212, 175, 55, 0.04) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(212, 175, 55, 0.04) 1px, transparent 1px);
             background-size: 40px 40px;
-            animation: moveGrid 15s linear infinite;
             margin: 0; padding: 10px;
             font-family: 'Montserrat', sans-serif; 
             display: flex; justify-content: center; align-items: center;
-            min-height: 100vh; overflow: hidden;
-        }
-
-        @keyframes moveGrid {
-            0% { background-position: 0 0; }
-            100% { background-position: 0 40px; }
+            min-height: 100vh;
         }
 
         .app-container {
             width: 100%; max-width: 400px;
             background: linear-gradient(145deg, rgba(15, 15, 15, 0.9), rgba(5, 5, 5, 0.95));
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             border-radius: 24px; padding: 35px 20px; box-sizing: border-box;
             border: 1px solid rgba(212, 175, 55, 0.2); 
             box-shadow: 0 20px 50px rgba(0,0,0,0.9), inset 0 0 20px rgba(204, 0, 0, 0.05); 
@@ -50,13 +45,9 @@
             border-radius: 50%; margin: 0 auto; 
             padding: 4px; 
             background: linear-gradient(135deg, #D4AF37 0%, #8B6914 100%); 
-            animation: pulseGold 3s infinite alternate;
+            /* Sombra fija sin latido */
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
             display: flex; justify-content: center; align-items: center;
-        }
-        
-        @keyframes pulseGold {
-            0% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
-            100% { box-shadow: 0 0 35px rgba(212, 175, 55, 0.6); }
         }
 
         .logo-circle {
@@ -69,24 +60,17 @@
             background: linear-gradient(135deg, #1f1f1f 0%, #050505 100%);
             border: 1px solid rgba(212, 175, 55, 0.5);
             border-radius: 18px; padding: 25px; margin-bottom: 30px;
+            /* Diseño estático sin 3D ni brillos en movimiento */
             box-shadow: 0 15px 30px rgba(0,0,0,0.8), 0 0 20px rgba(204, 0, 0, 0.15); 
             position: relative; overflow: hidden;
-            transform-style: preserve-3d;
         }
-        
-        .virtual-card::after {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: linear-gradient(45deg, transparent 40%, rgba(204,0,0,0.08) 50%, transparent 60%);
-            animation: hologram 4s infinite linear; pointer-events: none;
-        }
-        @keyframes hologram { 0% { transform: translateY(-50%) translateX(-50%) rotate(0deg); } 100% { transform: translateY(50%) translateX(50%) rotate(360deg); } }
 
-        .vc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; transform: translateZ(20px); }
+        .vc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
         .vc-bank { font-size: 16px; font-weight: 800; color: #FFF; letter-spacing: 2px; }
         
         .vc-type { font-size: 10px; color: #D4AF37; text-transform: uppercase; font-weight: 800; letter-spacing: 2px;}
         
-        .vc-number-row { text-align: center; margin: 25px 0; transform: translateZ(40px); }
+        .vc-number-row { text-align: center; margin: 25px 0; }
         .vc-number { 
             font-family: 'Space Mono', monospace; 
             font-size: 18px; 
@@ -96,7 +80,7 @@
             text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
         }
         
-        .vc-footer { display: flex; justify-content: space-between; align-items: flex-end; transform: translateZ(25px); }
+        .vc-footer { display: flex; justify-content: space-between; align-items: flex-end; }
         .vc-holder-label { font-size: 8px; color: #888; margin-bottom: 5px; text-transform: uppercase; font-weight: 800; letter-spacing: 1px;}
         .vc-holder-name { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: #D4AF37; white-space: nowrap;}
         
@@ -123,11 +107,11 @@
         .data-label { font-size: 9px; color: #666; margin-bottom: 4px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;}
         .data-value { 
             font-family: 'Space Mono', monospace; 
-            font-size: 14px; /* Tamaño restaurado para máxima legibilidad */
+            font-size: 14px; 
             font-weight: 700; 
             color: #FFF; 
             letter-spacing: 1px;
-            word-break: break-all; /* Permite acomodarse sin desbordar */
+            word-break: break-all;
         }
         
         .btn-outline-copy {
@@ -146,11 +130,8 @@
             padding: 20px; border-radius: 14px; font-size: 13px; font-weight: 800; 
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-transform: uppercase; letter-spacing: 1px;
             border: 1px solid rgba(255, 51, 51, 0.5);
-            animation: pulseRed 2.5s infinite alternate;
-        }
-        @keyframes pulseRed {
-            0% { box-shadow: 0 5px 15px rgba(204, 0, 0, 0.3); }
-            100% { box-shadow: 0 10px 30px rgba(255, 26, 26, 0.6); }
+            /* Sombra estática, sin animación */
+            box-shadow: 0 10px 20px rgba(204, 0, 0, 0.4);
         }
         .btn-whatsapp:hover { transform: scale(1.02); filter: brightness(1.2); }
     </style>
@@ -166,7 +147,8 @@
             </div>
         </div>
 
-        <div class="virtual-card" data-tilt data-tilt-glare data-tilt-max-glare="0.2" data-tilt-max="10" data-tilt-speed="400" data-tilt-perspective="1000">
+        <!-- Removido los atributos de vanilla-tilt para evitar lentitud -->
+        <div class="virtual-card">
             <div class="vc-header">
                 <span class="vc-bank">BBVA</span>
                 <span class="vc-type">Débito</span>
@@ -222,9 +204,6 @@
         </a>
     </div>
 
-    <!-- Script de Micro-interacción 3D -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
-    
     <script>
         function copiarTexto(texto, elemento) {
             navigator.clipboard.writeText(texto).then(() => {
